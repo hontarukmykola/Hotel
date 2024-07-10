@@ -1,0 +1,33 @@
+﻿@using hotel.Entities
+@model List<HotelRoom>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">№</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Flour</th>
+            <th scope="col">Amound of people</th>
+            <th scope="col">Amound of bed</th>
+            <th scope="col">Price/24h</th>
+            <th scope="col">Discount</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+          <tr>
+            <th scope="row">@item.Id</th>
+                <td>@item.Number</td>
+                <td>@item.Rating</td>
+                <td>@item.Flour</td>
+                <td>@item.AmoundOfPeople</td>
+                <td>@item.AmoundOfBed</td>
+            <td>@item.Price</td>
+            <td>@item.Discount</td>
+            <td><button type="button" class="btn btn-danger btn-sm">Delete</button></td>
+        </tr>  
+        }
+    </tbody>
+</table>
