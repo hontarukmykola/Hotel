@@ -26,8 +26,12 @@
                 <td>@item.AmoundOfBed</td>
             <td>@item.Price</td>
             <td>@item.Discount</td>
-            <td><button type="button" class="btn btn-danger btn-sm">Delete</button></td>
+            <td><a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a></td>
         </tr>  
         }
+        <a asp-action="Create" class="btn btn-primary mb-3">
+            <i class="bi bi-plus-lg"></i>
+            Add New Product
+        </a>
     </tbody>
 </table>
