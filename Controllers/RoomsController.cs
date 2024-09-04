@@ -1,15 +1,23 @@
-﻿using hotel.Data;
+﻿using AutoMapper;
+using hotel.Data;
+using hotel.Dtos;
 using hotel.Entities;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace hotel.Controllers
 {
     public class RoomsController : Controller
     {
+        
+
         public HotelDbContext context;
-        public RoomsController()
+        private readonly IMapper mapper;
+
+        public RoomsController(IMapper mapper)
         {
             context= new HotelDbContext();
+            this.mapper = mapper;
         }
         public IActionResult Index()
         {
@@ -19,6 +27,14 @@ namespace hotel.Controllers
         {
             var rooms = context.HotelRooms.ToList();
             return View(rooms);
+        }
+        public IActionResult Details(int id)
+        {
+            var product = context.HotelRooms.Find(id);
+
+            if (product == null) return NotFound();
+
+            return View(mapper.Map<HotelRoomsDto>(product));
         }
 
         public IActionResult Delete(int id)
@@ -51,4 +67,6 @@ namespace hotel.Controllers
             return RedirectToAction("Catalog");
         }
     }
+
+ 
 }

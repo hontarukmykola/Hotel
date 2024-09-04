@@ -1,5 +1,11 @@
 ﻿@using hotel.Entities
 @model List<HotelRoom>
+<td>
+    <a asp-action="Create" class="btn btn-primary mb-3">
+        <i class="bi bi-plus-lg"></i>
+        Add New Product
+    </a>
+</td>
 <table class="table">
     <thead>
         <tr>
@@ -17,21 +23,40 @@
     <tbody>
         @foreach (var item in Model)
         {
-          <tr>
-            <th scope="row">@item.Id</th>
+            <tr>
+                <th scope="row">@item.Id</th>
                 <td>@item.Number</td>
                 <td>@item.Rating</td>
                 <td>@item.Flour</td>
                 <td>@item.AmoundOfPeople</td>
                 <td>@item.AmoundOfBed</td>
-            <td>@item.Price</td>
-            <td>@item.Discount</td>
-            <td><a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a></td>
-        </tr>  
+                <td>@item.Price</td>
+                <td>@item.Discount</td>
+               <td>
+                    <a class="btn btn-outline-secondary" asp-controller="Rooms" asp-action="Details" asp-route-id="@item.Id">
+                        <i class="bi bi-info-square-fill"></i>
+                    </a>
+                    <a class="btn btn-outline-warning" asp-controller="Rooms" asp-action="Edit" asp-route-id="@item.Id">
+                        <i class="bi bi-pencil-fill"></i>
+                    </a>
+                    <a class="btn btn-outline-danger" asp-controller="Rooms" asp-action="Delete" asp-route-id="@item.Id">
+                        <i class="bi bi-trash-fill"></i>
+                    </a>
+                </td>
+
+            
+            </tr>
         }
-        <a asp-action="Create" class="btn btn-primary mb-3">
-            <i class="bi bi-plus-lg"></i>
-            Add New Product
-        </a>
     </tbody>
 </table>
+                 
+               @* <td><a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a></td>
+
+                <td class="">
+
+                    <a class="btn btn-outline-warning" asp-controller="Catalog" asp-action="Edit"
+                   asp-route-id="@item.Id">
+                        <i class="bi bi-pencil-fill"></i>
+                    </a>
+
+                </td>*@ 
