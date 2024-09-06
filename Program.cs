@@ -1,7 +1,13 @@
-var builder = WebApplication.CreateBuilder(args);
+using hotel.Data;
+using Microsoft.EntityFrameworkCore;
 
+var builder = WebApplication.CreateBuilder(args);
+string ConnectionString = builder.Configuration.GetConnectionString("localDb")!;
+builder.Services.AddDbContext<HotelDbContext>(opt => opt.UseSqlServer(ConnectionString));
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAutoMapper(typeof(AppProfile));
 
 var app = builder.Build();
 
@@ -12,6 +18,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

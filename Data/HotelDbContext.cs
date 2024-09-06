@@ -5,7 +5,12 @@ namespace hotel.Data
 {
     public class HotelDbContext : DbContext
     {
+       
         public DbSet<HotelRoom> HotelRooms { get; set; }
+
+        public HotelDbContext() { }
+        public HotelDbContext(DbContextOptions options) : base(options) { }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);

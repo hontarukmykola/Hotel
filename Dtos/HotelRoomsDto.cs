@@ -1,6 +1,6 @@
 ﻿namespace hotel.Dtos
 {
-    internal class HotelRoomsDto
+    public class HotelRoomsDto
     {
         public int? Id { get; set; }
         public int Number { get; set; }
