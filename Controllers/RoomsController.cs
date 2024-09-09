@@ -5,6 +5,7 @@ using hotel.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 
+
 namespace hotel.Controllers
 {
     public class RoomsController : Controller
@@ -21,8 +22,56 @@ namespace hotel.Controllers
         }
         public IActionResult Index()
         {
+
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST - create object in db
+        [HttpPost]
+
+        public IActionResult Create(HotelRoom model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            context.HotelRooms.Add(model);
+            context.SaveChanges();
+                
+            return RedirectToAction("Catalog");
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var product = context.HotelRooms.Find(id);
+
+            if (product == null) return NotFound();
+
+            
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(HotelRoom model)
+        {
+            if (!ModelState.IsValid)
+            {
+                
+                return View(model);
+            }
+
+            context.HotelRooms.Update(model);
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+
         public IActionResult Catalog()
         {
             var rooms = context.HotelRooms.ToList();
@@ -48,25 +97,11 @@ namespace hotel.Controllers
 
             return RedirectToAction("Catalog");
         }
-        [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
+        
 
-        // POST - create object in db
-        [HttpPost]
 
-        public IActionResult Create(HotelRoom model)
-        {   
-            if (!ModelState.IsValid) return View(model);
-
-            context.HotelRooms.Add(model);
-            context.SaveChanges();
-
-            return RedirectToAction("Catalog");
-        }
     }
+
 
  
 }
