@@ -1,0 +1,89 @@
+﻿@using hotel.Dtos;
+@model HotelRoomsDto
+
+@{
+    var create = ViewBag.CreateMode;
+}
+<h1>@(create ? "Create" : "Edit") Product Form</h1>
+
+
+
+<form class="row g-3" method="post" asp-action="@(create ? "Create" : "Edit")">
+
+
+    
+    <div class="col-2">
+        <label asp-for=Id class="form-label">Id</label>
+        
+        <input asp-for=Id readonly type="text" placeholder="Generated" class="form-control">
+    </div>
+
+    <div class="col-10">
+        <label asp-for=Number class="form-label">Number</label>
+        <input asp-for=Number type="text" class="form-control" placeholder="Enter Number">
+        <span class="small text-danger" asp-validation-for="Number"></span>
+    </div>
+
+    <div class="col-md-5">
+        <label asp-for=Price class="form-label">Price</label>
+        <div class="input-group">
+            <input required asp-for=Price type="number" min="0" step="0.01" class="form-control" placeholder="Enter  price">
+            <span class="input-group-text">$</span>
+        </div>
+
+        <span class="small text-danger" asp-validation-for="Price"></span>
+    </div>
+
+    <div class="col-md-4">
+        <label asp-for=Discount class="form-label">Discount</label>
+        <div class="input-group">
+            <input asp-for=Discount type="number"  min="0" max="100" class="form-control"
+            placeholder="Enter product discount">
+            <span class="input-group-text">%</span>
+        </div>
+        <span class="small text-danger" asp-validation-for="Discount"></span>
+    </div>
+    <div class="col-10">
+        <label asp-for=Rating class="form-label">Rating</label>
+        <input asp-for=Rating type="text" class="form-control" placeholder="Enter Rating">
+        <span class="small text-danger" asp-validation-for="Rating"></span>
+    </div>
+
+    <div class="col-10">
+        <label asp-for=Flour class="form-label">Flour</label>
+        <input asp-for=Flour type="text" class="form-control" placeholder="Enter Flour">
+        <span class="small text-danger" asp-validation-for="Flour"></span>
+    </div>
+
+    <div class="col-10">
+        <label asp-for=AmoundOfPeople class="form-label">Amound Of People</label>
+        <input asp-for=AmoundOfPeople type="text" class="form-control" placeholder="Enter Amound Of People">
+        <span class="small text-danger" asp-validation-for="AmoundOfPeople"></span>
+    </div>
+    <div class="col-10">
+        <label asp-for=AmoundOfBed class="form-label">Amound Of Bed</label>
+        <input asp-for=AmoundOfBed type="text" class="form-control" placeholder="Enter Amound Of Bed">
+        <span class="small text-danger" asp-validation-for="AmoundOfBed"></span>
+    </div>
+
+    <div class="col-md-6">
+        <a asp-action="Catalog" class="btn btn-dark w-100">
+            <i class="bi bi-arrow-left"></i>
+            Back
+        </a>
+    </div>
+
+
+
+    <div class="col-md-6">
+        <button type="submit" class="btn btn-success w-100">
+            <i class="bi bi-plus-lg"></i>
+            @(create ? "Create" : "Edit")
+        </button>
+    </div>
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+   
+
+</form>

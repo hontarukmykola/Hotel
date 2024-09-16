@@ -26,24 +26,35 @@ namespace hotel.Controllers
             return View();
         }
 
+
+
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+
+            ViewBag.CreateMode = true;
+            return View("Upsert");
         }
 
         // POST - create object in db
         [HttpPost]
 
-        public IActionResult Create(HotelRoom model)
+        public IActionResult Create(HotelRoomsDto model)
         {
-            if (!ModelState.IsValid) return View(model);
-
-            context.HotelRooms.Add(model);
+            if (!ModelState.IsValid)
+            {
+                ViewBag.CreateMode = true;
+                return View("Upsert", model);
+            }
+            var entity = mapper.Map<HotelRoom>(model);
+            context.HotelRooms.Add(entity);
             context.SaveChanges();
-                
+
             return RedirectToAction("Catalog");
         }
+
+
+
 
         [HttpGet]
         public IActionResult Edit(int id)
@@ -52,20 +63,22 @@ namespace hotel.Controllers
 
             if (product == null) return NotFound();
 
-            
-            return View(product);
+
+            ViewBag.CreateMode = false;
+            return View("Upsert", mapper.Map<HotelRoomsDto>(product));
         }
 
         [HttpPost]
-        public IActionResult Edit(HotelRoom model)
+        public IActionResult Edit(HotelRoomsDto model)
         {
             if (!ModelState.IsValid)
             {
-                
-                return View(model);
+
+                ViewBag.CreateMode = false;
+                return View("Upsert", model);
             }
 
-            context.HotelRooms.Update(model);
+            context.HotelRooms.Update(mapper.Map<HotelRoom>(model));
             context.SaveChanges();
 
             return RedirectToAction("Catalog");
