@@ -68,7 +68,7 @@ namespace hotel.Controllers
             context.HotelRooms.Update(model);
             context.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Catalog");
         }
 
 
