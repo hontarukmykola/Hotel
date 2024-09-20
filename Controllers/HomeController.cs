@@ -1,4 +1,5 @@
-﻿using hotel.Models;
+﻿using hotel.Data;
+using hotel.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,16 +7,18 @@ namespace hotel.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly HotelDbContext context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(HotelDbContext context)
         {
-            _logger = logger;
+            this.context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var rooms = context.HotelRooms.ToList();
+            return View(rooms);
+
         }
 
         public IActionResult Privacy()  

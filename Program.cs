@@ -17,6 +17,15 @@ builder.Services.AddFluentValidationClientsideAdapters();
 // Load an assembly reference rather than using a marker type.
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
+// --------------- Sessions
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromDays(10);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 
 
 builder.Services.AddAutoMapper(typeof(AppProfile));
@@ -38,6 +47,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

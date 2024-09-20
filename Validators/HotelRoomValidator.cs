@@ -1,9 +1,10 @@
 ﻿using FluentValidation;
+using hotel.Dtos;
 using hotel.Entities;
 
 namespace hotel.Validators
 {
-    public class HotelRoomValidator : AbstractValidator<HotelRoom>
+    public class HotelRoomValidator : AbstractValidator<HotelRoomsDto>
     {
         public HotelRoomValidator()
         {
@@ -23,6 +24,8 @@ namespace hotel.Validators
                 .NotNull()
                 .NotEmpty();
             RuleFor(x => x.Price)
+                .NotEmpty()
+                .NotNull()
                 .GreaterThan(0);
             RuleFor(x => x.Discount)
                 .InclusiveBetween(0, 100);

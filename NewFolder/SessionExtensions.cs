@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace hotel.Extensions
+namespace hotel.NewFolder
 {
     public static class SessionExtensions
     {
