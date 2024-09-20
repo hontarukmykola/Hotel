@@ -1,3 +1,5 @@
+using FluentValidation.AspNetCore;
+using FluentValidation;
 using hotel.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,6 +8,16 @@ string ConnectionString = builder.Configuration.GetConnectionString("localDb")!;
 builder.Services.AddDbContext<HotelDbContext>(opt => opt.UseSqlServer(ConnectionString));
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+// configure fluent validators
+builder.Services.AddFluentValidationAutoValidation();
+// enable client-side validation
+builder.Services.AddFluentValidationClientsideAdapters();
+// Load an assembly reference rather than using a marker type.
+builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+
+
 
 builder.Services.AddAutoMapper(typeof(AppProfile));
 
